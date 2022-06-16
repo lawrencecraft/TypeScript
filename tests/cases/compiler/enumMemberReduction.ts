@@ -10,6 +10,12 @@ enum MyStringEnum {
   C = "c",
 }
 
+enum MyStringEnumWithEmpty {
+  A = "",
+  B = "b",
+  C = "c",
+}
+
 export function fn(optionalEnum: MyEnum | undefined) {
   return optionalEnum ?? MyEnum.A;
 }
@@ -28,4 +34,8 @@ export function fn4(optionalEnum?: MyEnum) {
 
 export function fn5(optionalEnum?: MyStringEnum) {
   return optionalEnum || MyStringEnum.B;
+}
+
+export function fn6(optionalEnum?: MyStringEnumWithEmpty) {
+  return optionalEnum || MyStringEnumWithEmpty.B;
 }

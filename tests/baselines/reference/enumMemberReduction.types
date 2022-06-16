@@ -28,6 +28,22 @@ enum MyStringEnum {
 >"c" : "c"
 }
 
+enum MyStringEnumWithEmpty {
+>MyStringEnumWithEmpty : MyStringEnumWithEmpty
+
+  A = "",
+>A : MyStringEnumWithEmpty.A
+>"" : ""
+
+  B = "b",
+>B : MyStringEnumWithEmpty.B
+>"b" : "b"
+
+  C = "c",
+>C : MyStringEnumWithEmpty.C
+>"c" : "c"
+}
+
 export function fn(optionalEnum: MyEnum | undefined) {
 >fn : (optionalEnum: MyEnum | undefined) => MyEnum
 >optionalEnum : MyEnum
@@ -80,11 +96,23 @@ export function fn5(optionalEnum?: MyStringEnum) {
 >fn5 : (optionalEnum?: MyStringEnum) => MyStringEnum
 >optionalEnum : MyStringEnum
 
-    return optionalEnum || MyStringEnum.B;
+  return optionalEnum || MyStringEnum.B;
 >optionalEnum || MyStringEnum.B : MyStringEnum
 >optionalEnum : MyStringEnum
 >MyStringEnum.B : MyStringEnum.B
 >MyStringEnum : typeof MyStringEnum
 >B : MyStringEnum.B
-  }
-  
+}
+
+export function fn6(optionalEnum?: MyStringEnumWithEmpty) {
+>fn6 : (optionalEnum?: MyStringEnumWithEmpty) => MyStringEnumWithEmpty.B | MyStringEnumWithEmpty.C
+>optionalEnum : MyStringEnumWithEmpty
+
+  return optionalEnum || MyStringEnumWithEmpty.B;
+>optionalEnum || MyStringEnumWithEmpty.B : MyStringEnumWithEmpty.B | MyStringEnumWithEmpty.C
+>optionalEnum : MyStringEnumWithEmpty
+>MyStringEnumWithEmpty.B : MyStringEnumWithEmpty.B
+>MyStringEnumWithEmpty : typeof MyStringEnumWithEmpty
+>B : MyStringEnumWithEmpty.B
+}
+
